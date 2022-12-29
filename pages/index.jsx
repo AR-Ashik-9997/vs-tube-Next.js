@@ -2,19 +2,18 @@ import Link from "next/link";
 import React from "react";
 
 const index = ({ video }) => {
-  return (
-    
+  return (    
     <div className=" grid lg:grid-cols-4 gap-10 p-5">
       <title>Vs-Tube</title>
       {video.map((item) => (
         <div key={item._id}>
           <Link href={`./ViewPage-${item.video_url}`}>
-            <div className="card card-compact w-full bg-base-100 xl:overflow-hidden shadow-xl">
+            <div className="card card-compact w-full bg-base-100 xl:overflow-hidden">
               <figure>
                 <img src={item.img_url} alt={item.title} className="rounded-xl w-full" />
               </figure>
               <div className="card-body w-full">
-              <h2 className="card-title lg:text-sm xl:text-sm">{item.title}</h2>               
+              <h2 className="card-title lg:text-sm xl:text-lg">{item.title}</h2>               
               </div>
             </div>
           </Link>
