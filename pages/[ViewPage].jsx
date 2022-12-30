@@ -1,9 +1,11 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import Comments from './Comments';
 
 const ViewPage = ({videoInfo}) => {
+  const commenting= useSelector((state)=>state.comment.comments);
   const router = useRouter();
   const video_url = router.query.ViewPage? router.query.ViewPage.replace("ViewPage-", ""): "";
  const [single_video, setsingle_video] = useState([]);
@@ -29,7 +31,14 @@ const ViewPage = ({videoInfo}) => {
               <p className="card-title">{item.title}</p>
             </div>
           </div>
-          <Comments/>
+          <Comments data={item._id}/>
+         {
+          commenting.map((item)=>(
+            <div key={item.id}>
+              <p>{item.comment}</p>
+            </div>
+          ))
+         }
         </div>
       ))}    
 
