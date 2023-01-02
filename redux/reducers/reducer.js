@@ -12,7 +12,7 @@ const commentSlice = createSlice({
         comment.id=state.comments.length;        
         axios({
           method: "POST",          
-          url: "http://localhost:5000/AddComments",
+          url: "https://vs-tube-server.vercel.app/AddComments",
           data: comment,
         })
           .then((response)=> {response.data})

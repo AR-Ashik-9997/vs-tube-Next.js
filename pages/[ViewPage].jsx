@@ -9,7 +9,7 @@ const ViewPage = ({videoInfo}) => {
   const video_url = router.query.ViewPage? router.query.ViewPage.replace("ViewPage-", ""): "";
  const [single_video, setsingle_video] = useState([]);
  useEffect(() => {
-   fetch(`http://localhost:5000/single-video/${video_url}`)
+   fetch(`https://vs-tube-server.vercel.app/single-video/${video_url}`)
      .then((response) => response.json())
      .then((data) => setsingle_video(data));
  }, [video_url]);
@@ -64,7 +64,7 @@ const ViewPage = ({videoInfo}) => {
 export default ViewPage;
 
 export const getServerSideProps = async () => {
-  const allvideo = await fetch("http://localhost:5000/video-info");
+  const allvideo = await fetch("https://vs-tube-server.vercel.app/video-info");
   const allData = await allvideo.json();
   return {
     props: {

@@ -24,7 +24,7 @@ const index = ({ video }) => {
 };
 export default index;
 export const getServerSideProps = async () => {
-  const res = await fetch("http://localhost:5000/video-info");
+  const res = await fetch("https://vs-tube-server.vercel.app/video-info");
   const data = await res.json();
   return {
     props: {
