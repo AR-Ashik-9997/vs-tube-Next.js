@@ -1,6 +1,7 @@
 import Link from "next/link";
 import React from "react";
 const Header = () => {
+
   return (
     <section>
       <div className="navbar bg-base-100">
@@ -12,6 +13,7 @@ const Header = () => {
           </Link>
         </div>
         <div className="navbar-end">
+          
           <div className="dropdown dropdown-end">
             <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
               <div className="w-10 rounded-full">

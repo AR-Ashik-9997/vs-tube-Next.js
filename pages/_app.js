@@ -9,9 +9,9 @@ export default function App({ Component, pageProps }) {
   return (
     <Provider store={store}>
       <QueryClientProvider client={queryClient}>
-      <Root>
-        <Component {...pageProps} />
-      </Root>
+        <Root>
+          <Component {...pageProps} />
+        </Root>
       </QueryClientProvider>
     </Provider>
   );
