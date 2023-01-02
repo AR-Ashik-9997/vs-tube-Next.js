@@ -3,10 +3,8 @@ import { useDispatch} from "react-redux";
 import {Comment} from "../redux/reducers/reducer.js";
 import { connect } from "react-redux";
 
-const Comments = ({data}) => {  
-  const dispatch = useDispatch();
- 
- 
+const CommentsForm = ({data}) => {  
+  const dispatch = useDispatch(); 
   const [userComment, setuserComment] = useState({
     comment: "",
   });
@@ -21,11 +19,11 @@ const Comments = ({data}) => {
       payload:{
         video_id:data,
         comment:userComment.comment,
-      }
-      
+      }      
     }));
     setuserComment({ ...userComment, comment: "" });
     event.target.reset();
+    
   }; 
   return (
     <div className="w-full mt-6">
@@ -62,4 +60,4 @@ const Comments = ({data}) => {
   );
 };
 
-export default connect()(Comments);
+export default connect()(CommentsForm);

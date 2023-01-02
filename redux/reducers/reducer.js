@@ -1,24 +1,30 @@
 import { createSlice } from "@reduxjs/toolkit";
-import COMMENTS from "../../Data/comments";
+import axios from "axios";
 const commentSlice = createSlice({
-    name: "comment",
-    initialState: {
-        value:0,
-      comments:COMMENTS
+  name: "comment",
+  initialState: {
+    comments: [],
+  },
+  reducers: {
+    Comment: (state, action)=> {     
+      if (action.payload.type === "ADD_USER_COMMENT") {
+        const comment = action.payload.payload;
+        comment.id=state.comments.length;        
+        axios({
+          method: "POST",          
+          url: "http://localhost:5000/AddComments",
+          data: comment,
+        })
+          .then((response)=> {response.data})
+          return{
+            ...state.comments,
+            comments: state.comments.concat(comment)            
+          }
+      }      
+      return state;
     },
-    reducers:{
-        Comment:(state,action)=>{
-            if(action.payload.type === "ADD_USER_COMMENT"){
-                let comment =action.payload.payload;
-                comment.id=state.comments.length;                                                                         
-                return{
-                    ...state.comments,
-                    comments: state.comments.concat(comment)                  
-                }                              
-            }           
-            return state;            
-        }
-    }
-  });
-  export const {Comment} = commentSlice.actions;
-  export default commentSlice.reducer;
+  },
+});
+
+export const { Comment } = commentSlice.actions;
+export default commentSlice.reducer;

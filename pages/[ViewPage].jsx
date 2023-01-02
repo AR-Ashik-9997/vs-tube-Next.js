@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import Comments from './Comments';
+import CommentsForm from './CommentsForm';
+import ViewComments from './ViewComments';
 
 const ViewPage = ({videoInfo}) => {
-  const commenting= useSelector((state)=>state.comment.comments);
   const router = useRouter();
   const video_url = router.query.ViewPage? router.query.ViewPage.replace("ViewPage-", ""): "";
  const [single_video, setsingle_video] = useState([]);
@@ -17,8 +16,7 @@ const ViewPage = ({videoInfo}) => {
 
   return (
     <div className="flex-row lg:flex gap-8 p-0 lg:p-5">
-      {single_video.map((item) => (
-        
+      {single_video.map((item) => (        
         <div key={item._id} className="w-full lg:w-10/12">
            <title>{item.title}</title>
           <div className="card card-compact w-full rounded-none">
@@ -31,14 +29,8 @@ const ViewPage = ({videoInfo}) => {
               <p className="card-title">{item.title}</p>
             </div>
           </div>
-          <Comments data={item._id}/>
-         {
-          commenting.map((item)=>(
-            <div key={item.id}>
-              <p>{item.comment}</p>
-            </div>
-          ))
-         }
+          <CommentsForm data={item._id}/>
+         <ViewComments video_id={item._id}/>
         </div>
       ))}    
 
@@ -76,7 +68,7 @@ export const getServerSideProps = async () => {
   const allData = await allvideo.json();
   return {
     props: {
-      videoInfo: allData,
+      videoInfo: allData,      
     },
   };
 };
